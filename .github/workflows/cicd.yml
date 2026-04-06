@@ -24,3 +24,9 @@ jobs:
     - name: Run tests
       run: |
         PYTHONPATH=. pytest
+    - name: Deploy to AWS Lambda
+      run: |
+        zip -r app.zip .
+        aws lambda update-function-code \
+          --function-name resume-analyzer \
+          --zip-file fileb://app.zip
